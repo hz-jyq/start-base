@@ -22,7 +22,7 @@ public abstract class StartRest {
 	        System.out.println("Starting grizzly...");  
 	    	ResourceConfig rc = buildResourceConfig();
 	        HttpServer server  = GrizzlyHttpServerFactory.createHttpServer(URI.create(baseUri), rc);
-	        System.out.println(String.format("Jersey app started with WADL available at" + "%sapplication.wadl\nTry out %shelloworld\nHit enter to stop it...",baseUri,baseUri));
+	        System.out.println(String.format("Jersey app started with WADL available at" + "%s application.wadl\nTry out %shelloworld\nHit enter to stop it...",baseUri,baseUri));
 	        System.out.println("...started");  
 	        try {
 				System.in.read();
