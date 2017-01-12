@@ -11,6 +11,7 @@ public abstract class StartRest {
 	
 	protected ResourceConfig buildResourceConfig() {
 		 	ResourceConfig rc =new ResourceConfig();
+		 	 rc.packages("com.fengdai.rest.config");
 		 	settingResourceConfig(rc);
 		 	return rc;
 	}
