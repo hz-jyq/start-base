@@ -1,15 +1,27 @@
 package com.fengdai.rest.helper;
 
+import java.util.Locale;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSONObject;
 import com.fengdai.base.exception.BusinessException;
 import com.fengdai.base.exception.ErrorCode;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+
 
 public class ResourceHelper {
-	public static Response toError(Exception e){
+	public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").serializeNulls().create();
+	private static Logger logger = LoggerFactory.getLogger(ResourceHelper.class);
+	
+	public static  Response toError(Exception e){
 		
 		if(e instanceof BusinessException){
 			BusinessException businessException = (BusinessException) e;
@@ -22,18 +34,16 @@ public class ResourceHelper {
 				json.put("error", error);
 				return toError(json.toString());
 			}
-			return toError(errorCode);	
-		/*}else if(e instanceof AuthTokenException){
-			//401
-			return Response.status(Status.UNAUTHORIZED).build();
 		}else{
 			logger.error("系统异常500:"+e.getMessage());
-			return toJsonString("服务器正在疯狂计算，请等待或拨打服务电话4006690685",Status.INTERNAL_SERVER_ERROR);
-		}	*/
+			return process("服务器正在疯狂计算，请等待或拨打服务电话4006690685",Status.INTERNAL_SERVER_ERROR);
 		}
-		return toError("String");
-		
-			
+		/*}else if(e instanceof AuthTokenException){
+			401
+			return Response.status(Status.UNAUTHORIZED).build();
+		*/
+		return null;
+					
 	}
 	/**
 	 * 统一错误返回
@@ -41,7 +51,7 @@ public class ResourceHelper {
 	 * @return
 	 */
 	private static Response toError(String message){
-		return Response.status(Status.BAD_REQUEST).entity(message).type(MediaType.APPLICATION_JSON).build();
+		 return process(message,Status.BAD_REQUEST);
 	}
 	
 	/**
@@ -58,10 +68,19 @@ public class ResourceHelper {
      */
     public static Response returnSuccess(String json) {
         if (json != null) {
-            return Response.status(Status.OK).entity(json).type(MediaType.APPLICATION_JSON).build();
+            return Response.status(Status.OK).entity(json).encoding("utf-8").type(MediaType.APPLICATION_JSON).build();
         } else {
             return Response.status(Status.OK).build();
         }
     }
+    
+	private static Response process(Object object,Status status){
+		if (object != null) {
+			String json =GSON.toJson(object);
+            return Response.status(status).entity(json).encoding("utf-8").type(MediaType.APPLICATION_JSON).build();
+        } else {
+            return Response.status(status).build();
+        }
+	}
 
 }
