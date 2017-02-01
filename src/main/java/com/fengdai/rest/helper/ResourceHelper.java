@@ -1,7 +1,5 @@
 package com.fengdai.rest.helper;
 
-import java.util.Locale;
-
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -76,8 +74,7 @@ public class ResourceHelper {
     
 	private static Response process(Object object,Status status){
 		if (object != null) {
-			String json =GSON.toJson(object);
-            return Response.status(status).entity(json).encoding("utf-8").type(MediaType.APPLICATION_JSON).build();
+            return Response.status(status).entity(object).type(MediaType.APPLICATION_JSON).build();
         } else {
             return Response.status(status).build();
         }
