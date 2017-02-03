@@ -66,7 +66,7 @@ public class ResourceHelper {
      */
     public static Response returnSuccess(String json) {
         if (json != null) {
-            return Response.status(Status.OK).entity(json).encoding("utf-8").type(MediaType.APPLICATION_JSON).build();
+            return Response.status(Status.OK).entity(json).type(MediaType.APPLICATION_JSON).build();
         } else {
             return Response.status(Status.OK).build();
         }
