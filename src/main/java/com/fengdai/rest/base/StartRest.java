@@ -34,7 +34,4 @@ public abstract class StartRest {
 	        System.exit(0);  
 	        return server;
 	}
-
-	
-	
 }

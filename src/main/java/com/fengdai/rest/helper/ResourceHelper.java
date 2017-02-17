@@ -27,8 +27,8 @@ public class ResourceHelper {
 			if((businessException.getErrorCode().getDescription()!=null)){
 				JSONObject json = new JSONObject();
 				JSONObject error = new JSONObject();
-				error.put("code", errorCode.getCode());
-				error.put("description", businessException.getErrorCode().getDescription());
+				error.put("code", businessException.getCode());
+				error.put("description",businessException.getMessage());
 				json.put("error", error);
 				return toError(json.toString());
 			}
