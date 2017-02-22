@@ -3,15 +3,23 @@ package com.fengdai.rest.base;
 import java.io.IOException;
 import java.net.URI;
 
+import javax.validation.ConstraintValidator;
+import javax.validation.Validation;
+
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+
+import com.fengdai.rest.Annotation.NotNull;
+import com.fengdai.rest.Annotation.NotNull.ValidStringChecker;
 
 public abstract class StartRest {
 	
 	protected ResourceConfig buildResourceConfig() {
 		 	ResourceConfig rc =new ResourceConfig();
-		 	 rc.packages("com.fengdai.rest.config");
+		  rc.packages("com.fengdai.rest.config");
+		 	rc.register(com.fengdai.rest.config.ExceptionMapperSupport.class);
+		//	rc.register(com.fengdai.rest.config.ConstraintMapperSupport.class);
 		 	settingResourceConfig(rc);
 		 	return rc;
 	}
