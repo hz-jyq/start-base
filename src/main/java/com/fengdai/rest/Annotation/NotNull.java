@@ -16,7 +16,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = NotNull.ValidStringChecker.class)
 @Documented
-public @interface NotNull 
+public @interface NotNull  
 {
     String message() default "字符串不能为空";
     

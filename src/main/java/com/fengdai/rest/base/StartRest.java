@@ -17,9 +17,9 @@ public abstract class StartRest {
 	
 	protected ResourceConfig buildResourceConfig() {
 		 	ResourceConfig rc =new ResourceConfig();
-		  rc.packages("com.fengdai.rest.config");
+		 	rc.packages("com.fengdai.rest.config");
 		 	rc.register(com.fengdai.rest.config.ExceptionMapperSupport.class);
-		//	rc.register(com.fengdai.rest.config.ConstraintMapperSupport.class);
+			rc.register(com.fengdai.rest.config.ConstraintMapperSupport.class);
 		 	settingResourceConfig(rc);
 		 	return rc;
 	}
