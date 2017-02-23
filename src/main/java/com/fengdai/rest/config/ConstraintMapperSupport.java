@@ -14,11 +14,12 @@ public class ConstraintMapperSupport implements ExceptionMapper<ConstraintViolat
 	@Override
 	public Response toResponse(ConstraintViolationException exception) {
 		Set<ConstraintViolation<?>> set= exception.getConstraintViolations();
-		String str = null;
+		StringBuffer str=new StringBuffer("参数");
 		for(ConstraintViolation<?> v:set ){
-			str=v.getMessage();	
+			str.append(v.getPropertyPath().toString());
+			str.append(v.getMessage());	
 		}
-	    return Response.status(Status.OK).entity(str).type(MediaType.APPLICATION_JSON).build();
+	    return Response.status(Status.OK).entity(str.toString()).type(MediaType.APPLICATION_JSON).build();
 	}
 
 }
