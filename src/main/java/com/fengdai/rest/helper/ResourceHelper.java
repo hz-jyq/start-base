@@ -80,4 +80,12 @@ public class ResourceHelper {
         }
 	}
 
+	  /**
+     * @Description JSON 成功
+     */
+    public static final String SUCCESS_JSON = "{\"status\":\"success\"}";
+    /**
+     * @Description JSON 失败
+     */
+    public static final String FAILURE_JSON = "{\"status\":\"failure\"}";
 }
